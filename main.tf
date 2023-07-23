@@ -1,7 +1,15 @@
 provider "aws" {
-  region     = "us-east-1"
-  access_key = "AKIAJTTSSUF2PB6HDCCA"
-  secret_key = "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"
+    access_key = "${var.access_key}"
+    secret_key = "${var.secret_key}"
+    region = "us-east-1"
+}
+
+resource "aws_instance" "server-instance" {
+    ami = "${var.ami_id}"
+    count = "${var.number_of_instances}"
+    subnet_id = "${var.subnet_id}"
+    instance_type = "${var.instance_type}"
+    key_name = "${var.ami_key_pair_name}"
 }
 
 variable "subnet_prefix" {
@@ -42,21 +50,6 @@ resource "aws_subnet" "subnet-2" {
     value = aws.instance.server-instance.ip
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
