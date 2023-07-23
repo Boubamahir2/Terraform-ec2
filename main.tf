@@ -36,6 +36,11 @@ resource "aws_subnet" "subnet-2" {
   tags = {
     Name = var.subnet_prefix[1].name
   }
+
+  output "server_private_ip"{
+    value = aws.instance.server-instance.private_ip
+    value = aws.instance.server-instance.ip
+  }
 }
 
 
